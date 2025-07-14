@@ -3,7 +3,7 @@ const BASE_URL = "https://api.openweathermap.org/data/2.5/";
 const forecastContainer = document.querySelector(".forecast");
 const tempToggle = document.getElementById("converter");
 
-// Main Weather Data Elements
+
 const tempEl = document.querySelector(".temperature");
 const feelslikeEl = document.querySelector(".feelslike");
 const descEl = document.querySelector(".description");
@@ -11,7 +11,7 @@ const dateEl = document.querySelector(".date");
 const cityEl = document.querySelector(".city");
 const weatherIconEl = document.querySelector(".weatherIcon");
 
-// Highlight Elements
+
 const humidityEl = document.getElementById("HValue");
 const windEl = document.getElementById("WValue");
 const pressureEl = document.getElementById("PValue");
@@ -20,7 +20,7 @@ const uvEl = document.getElementById("UVValue");
 const sunriseEl = document.getElementById("SRValue");
 const sunsetEl = document.getElementById("SSValue");
 
-// Event Listeners
+
 tempToggle.addEventListener("change", () => {
   const location = document.getElementById("userLocation").value.trim();
   if (location) fetchWeather(location);
@@ -32,19 +32,18 @@ window.findUserLocation = () => {
   else alert("Please enter a location!");
 };
 
-// Fetch Weather Function
 async function fetchWeather(city) {
   try {
     const unit = tempToggle.value === "°F" ? "imperial" : "metric";
 
-    // Current Weather
+    
     const weatherRes = await fetch(
       `${BASE_URL}weather?q=${city}&appid=${API_KEY}&units=${unit}`
     );
     if (!weatherRes.ok) throw new Error("City not found");
     const weatherData = await weatherRes.json();
 
-    // Extract values
+  
     const {
       name,
       sys: { country, sunrise, sunset },
@@ -58,7 +57,7 @@ async function fetchWeather(city) {
     const icon = weather[0].icon;
     const iconUrl = `http://openweathermap.org/img/wn/${icon}@2x.png`;
 
-    // Update DOM
+  
     tempEl.textContent = `${Math.round(temp)} ${unit === "metric" ? "°C" : "°F"}`;
     feelslikeEl.textContent = `Feels like: ${Math.round(feels_like)}${unit === "metric" ? "°C" : "°F"}`;
     descEl.textContent = description.toUpperCase();
@@ -74,17 +73,16 @@ async function fetchWeather(city) {
     sunriseEl.textContent = `Sunrise: ${formatTime(sunrise)}`;
     sunsetEl.textContent = `Sunset: ${formatTime(sunset)}`;
 
-    // UV Approx (since free tier has no UV API, we mock value)
-    uvEl.textContent = `${Math.floor(Math.random() * 11)}`; // 0 to 10
+  
+    uvEl.textContent = `${Math.floor(Math.random() * 11)}`; 
 
-    // Fetch 5-Day Forecast
+    
     fetchForecastByCity(city, unit);
   } catch (err) {
     alert("Error: " + err.message);
   }
 }
 
-// Fetch Forecast Data using free API
 async function fetchForecastByCity(city, unit) {
   try {
     const forecastRes = await fetch(
@@ -101,7 +99,7 @@ async function fetchForecastByCity(city, unit) {
       }
     });
 
-    const dailyForecasts = Array.from(dailyMap.values()).slice(1, 7); // Next 6 days
+    const dailyForecasts = Array.from(dailyMap.values()).slice(1, 7); 
     forecastContainer.innerHTML = "";
 
     dailyForecasts.forEach(item => {
@@ -126,7 +124,7 @@ async function fetchForecastByCity(city, unit) {
   }
 }
 
-// Format UNIX time to readable time
+
 function formatTime(unix) {
   const date = new Date(unix * 1000);
   return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
