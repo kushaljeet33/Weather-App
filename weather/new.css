@@ -30,7 +30,6 @@ body {
   z-index: 1;
 }
 
-/* Background Overlay */
 .container::before,
 .weather-input::before,
 .weather-output::before {
@@ -48,7 +47,7 @@ body {
   pointer-events: none;
 }
 
-/* Input Section */
+
 .weather-input {
   flex: 1;
   min-width: 300px;
@@ -105,7 +104,6 @@ body {
   transform: scale(1.1);
 }
 
-/* Weather Info */
 .weatherIcon {
   font-size: 50px;
   text-align: center;
@@ -134,8 +132,6 @@ hr {
   border: none;
   border-top: 1px solid #ccc;
 }
-
-/* Output Section */
 .weather-output {
   flex: 2;
   min-width: 400px;
@@ -154,8 +150,6 @@ hr {
   padding-left: 10px;
   font-weight: 600;
 }
-
-/* Highlights */
 .highlights {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -212,8 +206,6 @@ hr {
 .sun p {
   margin: 0;
 }
-
-/* Forecast Section */
 .forecast {
   display: flex;
   flex-wrap: wrap;
@@ -263,7 +255,6 @@ hr {
   margin: 4px 0;
 }
 
-/* Animations */
 @keyframes riseUp {
   0% {
     transform: translateY(30px);
@@ -275,7 +266,6 @@ hr {
   }
 }
 
-/* Responsive Design */
 @media (max-width: 768px) {
   .container {
     flex-direction: column;
